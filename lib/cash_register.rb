@@ -42,7 +42,7 @@ end
 
 def void_last_transaction
   counter = @@transactions[-1][2]
-    while counter >= @@transactions[-1][2]
+    until counter < @@transactions[-1][2]
     @@items.pop
     counter -= 1
   end
