@@ -1,13 +1,13 @@
 require 'pry'
 
 class CashRegister
-  attr_accessor :total, :discount
+  attr_accessor :total, :discount, :items
   @@transactions = []
-  @@items = []
   
   def initialize(discount = 0)
     @total = 0
     @discount = discount
+    @items = []
 end
 
 def total
@@ -20,7 +20,7 @@ def add_item(item, price, qty = 1)
   @@transactions << [item, price, qty]
   counter = 1
     while counter <= qty
-    @@items << item
+    @items << item
     counter += 1
 end
   prev_total = @total
@@ -42,8 +42,8 @@ end
 
 def void_last_transaction
   counter = @@transactions[-1][2]
-    until counter < @@transactions[-1][2]
-    @@items.pop
+    while counter >= @@transactions[-1][2]
+    @items.pop
     counter -= 1
   end
   prev_total = @total
@@ -54,7 +54,7 @@ def void_last_transaction
 end
 
 def items
-  @@items
+  @items
 end
 
 end
